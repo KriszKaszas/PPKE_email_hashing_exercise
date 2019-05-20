@@ -1,0 +1,67 @@
+Az e-mail generátor által visszaadott érték: // Data structure generator 
+result: felfoldi.anna@hallgato.ppke.hu: set<map<int, set<char> >  >
+
+
+
+Enigma
+
+Készíts egy kriptográfiai programot, ami minimum három lépcsõben titkosít
+ egy üzenetet. A programhoz használhatod bármilyen már meglévõ titkosító 
+eszköz mûködési elvét, vagy készíthetsz saját algoritmust is. 
+Az elsõ lépcsõfok mindenképp az ASCII karakterek numerikus kódolása legyen. 
+Az abc betûi (kis- és nagybetûk), a pont, a szóköz és a vesszõ mindenképp 
+szerepeljen a kódolásban. Ezen felül bármilyen ASCII karakter szerepelhet 
+a kódolt táblában, aminek a használata valós titkosítási alkalmazásban indokolható.
+
+Ezután a másik két lépcsõfok tetszõleges kódolási algoritmust használhat. 
+Ezekben tetszõleges abc-k, illetve igény szerint UNICODE kódolás is használható. 
+
+Adatstruktúrák:
+
+Az egyes kódolási lépcsõfokok eredményeit a következõ struktúra szerint tárold
+a futási idõ alatt: set<map<T, T>>. A map kulcs-érték párjai bármilyen primitív
+vagy objektum adattípust használhatnak, de mindenképp legyen egy olyan lépcsõfok,
+ami az alábbi adatstruktúrát használja:
+
+set<map<int, set<char>>>
+
+E követelmény oka, hogy a set<char> rákényszerít karakter hash-ek generálására,
+így a kódolás nehezebben visszafejthetõvé válik. Továbbá a set<map<int, set<char>>> 
+kucs-érték párokat használ, ami kiválóan alkalmas titkosító tábla futási idõ alatti 
+tárolására.
+
+
+Egyéb követelmények:
+
+1.	Gondolkodj objektum-orientáltan, figyelj a rétegszeparációra: Gondold végig,
+ hogy egy ilyen szoftver milyen „alkatrészekbõl” állhat. Ezek az alkatrészek alkossanak
+ külön osztályt. Indokolt esetben használj absztrakt osztályt, aggregáló osztályokat. 
+A rétegek különüljenek el; külön osztályt alkosson a felhasználói felület, az 
+üzleti logika, és az adattárolás.
+
+2.	Ügyelj az adatrejtésre: használj private változókat, ezeket pedig, amennyiben 
+szükséges, validált, amennyiben pedig nem szükséges, validálatlan getter és setter 
+metódusokkal tedd elérhetõvé a többi osztály számára.
+
+3.	Ügyelj a kriptográfiai biztonságra: a három lépcsõfok kriptográfiai tábláit,
+melyeket a futási idõ alatt a set<map<T, T>> mintájú adatstruktúrákban tárolsz, három
+különbözõ, .csv fájlból olvassa be a program. Ez lehetõvé teszi a táblák módosítását 
+úgy, hogy a program belsõ mûködése érintetlen maradhat. Így, akár a való életben használt
+titkosítási eszközökben, a kódfejtõ táblák cserélhetõk lesznek, ami, például katonai 
+felhasználásban elengedhetetlen, amennyiben bármelyik, vagy mindhárom tábla ellenséges
+kézbe kerül. A táblákat a program a futási idõ alatt csak olvashatja, SEMMI ESETRE SEM MÓDOSÍTHATJA,
+ elkerülendõ, hogy szabotálható legyen bármelyik kódtábla. 
+
+4.	A program legyen interaktív. Tegye lehetõvé a kódtáblák kiválasztását, annak kiválasztását,
+hogy kódolni, vagy dekódolni kívánunk egy üzenetet, illetve az üzenet megadását. 
+
+5.	A táblákban a kulcsok mintájára az értékek is legyenek egyedülállók, egy táblában ne ismétlõdjön
+ugyanaz az érték, mert egy ilyen titkosító algoritmus megírása túlmutat e feladat keretein. A táblák a 
+feladathoz manuálisan elkészíthetõk, nem kötelezõ ezek generálására külön programot írni.
+
+Szorgalmi feladat:
+
+Gyakorlás céljából ajánlott egy olyan programot is készíteni, ami random, vagy félig random módon generálja
+a titkosító táblákat. Ehhez tervezz saját algoritmusokat, és mindhárom tábla generálásához használj különbozõ
+algoritmust. A program legyen automata, ne igényeljen felhasználói inputot. Az indítás után a saját mappáján
+belül generálja le a táblákat.
