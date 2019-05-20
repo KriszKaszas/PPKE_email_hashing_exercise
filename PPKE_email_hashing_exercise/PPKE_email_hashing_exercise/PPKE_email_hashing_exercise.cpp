@@ -131,6 +131,82 @@ public:
         return primaryDecryptionCypher;
     }
 
+    set<map<int, set<char>>> getSecondaryEncryptionCypherFromFile() {
+
+        ifstream primaryCypher;
+        primaryCypher.open("./CypherTables/hashingCypherTable.csv");
+        set<map<int, set<char>>> secondaryEncryptionCypher;
+
+        while (primaryCypher.good()) {
+            map<int, set<char>> cypherPair;
+            string cypherPairString;
+            set<char> characterHash;
+            getline(primaryCypher, cypherPairString);
+
+            try {
+                int numericalValue = stoi(cypherPairString.substr(8, 2));
+
+                char firstAlphabeticalValue = cypherPairString[0];
+                char secondAlphabeticalValue = cypherPairString[2];
+                char thirdAlphabeticalValue = cypherPairString[4];
+                char forthAlphabeticalValue = cypherPairString[6];
+
+                characterHash.insert(firstAlphabeticalValue);
+                characterHash.insert(secondAlphabeticalValue);
+                characterHash.insert(thirdAlphabeticalValue);
+                characterHash.insert(forthAlphabeticalValue);
+
+                cypherPair.insert(pair<int, set<char>>(numericalValue, characterHash));
+            }
+            catch (out_of_range) {
+                cout << "Secondary Encryption Cypher Successfully Loaded." << endl;
+            }
+            catch (invalid_argument) {}
+            secondaryEncryptionCypher.insert(cypherPair);
+        }
+        primaryCypher.close();
+
+        return secondaryEncryptionCypher;
+    }
+
+    set<map<set<char>, int>> getSecondaryDecryptionCypherFromFile() {
+
+        ifstream primaryCypher;
+        primaryCypher.open("./CypherTables/hashingCypherTable.csv");
+        set<map<set<char>, int>> secondaryDecryptionCypher;
+
+        while (primaryCypher.good()) {
+            map<set<char>, int> cypherPair;
+            string cypherPairString;
+            set<char> characterHash;
+            getline(primaryCypher, cypherPairString);
+
+            try {
+                int numericalValue = stoi(cypherPairString.substr(8, 2));
+
+                char firstAlphabeticalValue = cypherPairString[0];
+                char secondAlphabeticalValue = cypherPairString[2];
+                char thirdAlphabeticalValue = cypherPairString[4];
+                char forthAlphabeticalValue = cypherPairString[6];
+
+                characterHash.insert(firstAlphabeticalValue);
+                characterHash.insert(secondAlphabeticalValue);
+                characterHash.insert(thirdAlphabeticalValue);
+                characterHash.insert(forthAlphabeticalValue);
+
+                cypherPair.insert(pair<set<char>, int>(characterHash, numericalValue));
+            }
+            catch (out_of_range) {
+                cout << "Secondary Decryption Cypher Successfully Loaded." << endl;
+            }
+            catch (invalid_argument) {}
+            secondaryDecryptionCypher.insert(cypherPair);
+        }
+        primaryCypher.close();
+
+        return secondaryDecryptionCypher;
+    }
+
 };
 
 
